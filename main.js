@@ -25,7 +25,7 @@ var game = new Phaser.Game(gameconfig);
 
 import LoadingScene from './loadingscene.js';
 import MenuScene from './menuscene.js';
-import CastleScene from './basiccastlescene.js';
+import CastleScene from './castlescene.js';
 
 game.scene.add('boot', LoadingScene, false);
 game.scene.add('menu', MenuScene, false);

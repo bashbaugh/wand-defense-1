@@ -4,9 +4,12 @@ class Loading extends Phaser.Scene{
   }
 
   loadAllAssets() {
+    var img = 'assets/images/';
+    var sps = 'assets/spritesheets/';
     this.load.tilemapTiledJSON('castle', 'assets/tilemaps/castle_basic.json');
-    this.load.spritesheet('tiles', 'assets/tilesets/pave-1.png', {frameWidth: 64, frameHeight: 64});
-    this.load.image('player', 'assets/spritesheets/wizardplayer.png');
+    this.load.spritesheet('tiles', 'assets/tilesets/castle1.png', {frameWidth: 64, frameHeight: 64});
+    this.load.image('player', sps + 'wizardplayer.png');
+    this.load.image('drawbrdige_icon', img + 'lower_raise_drawbridge.png')
   }
 
   preload() {
@@ -46,7 +49,7 @@ class Loading extends Phaser.Scene{
 
     this.load.on('complete', function () {
         percentText.setText("100%");
-        assetText.destroy();
+        assetText.setText("All Assets Loaded");
 
         setTimeout(() => this.scene.scene.start('menu'), 500);
     });
