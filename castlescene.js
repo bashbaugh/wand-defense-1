@@ -1,6 +1,6 @@
-import UI from './ui.js';
-import Player from './player.js';
-import Map from './map.js';
+import UI from './game-parts/ui.js';
+import Player from './game-parts/player.js';
+import Map from './game-parts/map.js';
 
 const wizardVelocity = 100;
 
@@ -13,12 +13,13 @@ class Castle extends Phaser.Scene{
 
     create (data)  {
         this.map = new Map(this);
-        player = new Player(this);
-        ui = new UI(this);
+        this.player = new Player(this);
+        this.ui = new UI(this);
     }
 
     update(time, delta) {
-      player.update(time, delta);
+      this.ui.update(time, delta);
+      this.player.update(time, delta);
     }
 
 }

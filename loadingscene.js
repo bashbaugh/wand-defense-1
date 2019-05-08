@@ -4,12 +4,16 @@ class Loading extends Phaser.Scene{
   }
 
   loadAllAssets() {
-    var img = 'assets/images/';
-    var sps = 'assets/spritesheets/';
+    // Cycle through cursors so that they are all loaded
+    this.input.setDefaultCursor('url(assets/images/hover1.cur) 16 16, pointer');
+    this.input.setDefaultCursor('url(assets/images/cursor.cur) 16 16, pointer');
+    // Load all assets
+    const img = 'assets/images/';
+    const sps = 'assets/spritesheets/';
     this.load.tilemapTiledJSON('castle', 'assets/tilemaps/castle_basic.json');
     this.load.spritesheet('tiles', 'assets/tilesets/castle1.png', {frameWidth: 64, frameHeight: 64});
     this.load.image('player', sps + 'wizardplayer.png');
-    this.load.image('drawbrdige_icon', img + 'lower_raise_drawbridge.png')
+    this.load.image('drawbridge_icon', img + 'lower_raise_drawbridge.png')
   }
 
   preload() {
@@ -53,8 +57,6 @@ class Loading extends Phaser.Scene{
 
         setTimeout(() => this.scene.scene.start('menu'), 500);
     });
-
-    this.scene.scene.input.setDefaultCursor('url(assets/images/cursor.cur) 16 16, pointer');
 
     this.loadAllAssets();
   }

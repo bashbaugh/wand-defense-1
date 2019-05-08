@@ -6,12 +6,11 @@ const wizardVelocity = 200;
 
 class Player {
     
-    create_player() {
+    create() {
         var width = scene.cameras.main.width;
         var height = scene.cameras.main.height;
         
         player = scene.physics.add.sprite(width / 2, height / 2, 'player');
-        player.setCollideWorldBounds(true);
         
         pointer = scene.input.activePointer;
         
@@ -21,13 +20,13 @@ class Player {
     
     constructor(scn) {
         scene = scn;
-        this.create_player();
+        this.create();
     }
     
     update(time, delta) {
       let rotation = Phaser.Math.Angle.Between(player.x, player.y, pointer.x + scene.cameras.main.scrollX, pointer.y + scene.cameras.main.scrollY) + 1.5708;
 
-      if (pointer.leftButtonDown()) {
+      if (pointer.leftButtonDown() && !scene.ui.uiAction) {
         targetx = pointer.x + scene.cameras.main.scrollX;
         targety = pointer.y + scene.cameras.main.scrollY;
         player.rotation = rotation;
