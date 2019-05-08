@@ -2,25 +2,50 @@ var scene;
 var width, height;
 var drawbridge;
 
+const camScrollIncrement = 80;
+
 class UI {
     
-    create_ui() {
+    create() {
+      var cam = scene.cameras.main;
+      var keyboard = scene.input.keyboard;
+      // Buttons
       drawbridge = scene.make.image({
         key: 'drawbridge_icon',
         x: width / 2 - 100,
-        y: height - 32
+        y: height - 32,
       })
       .setInteractive()
+      .setScrollFactor(0)
       .on('pointerover', () => this.enterButtonActive())
       .on('pointerout', () => this.exitButtonActive())
       .on('pointerup', () => console.log("drawbridge toggled"));
+      
+      // Keyboard
+      keyboard.on('keydown-LEFT', () => {
+        cam.stopFollow();
+        cam.scrollX -= camScrollIncrement;
+      });
+      keyboard.on('keydown-RIGHT', () => {
+        cam.stopFollow();
+        cam.scrollX += camScrollIncrement;
+      });
+      keyboard.on('keydown-UP', () => {
+        cam.stopFollow();
+        cam.scrollY -= camScrollIncrement;
+      });
+      keyboard.on('keydown-DOWN', () => {
+        cam.stopFollow();
+        cam.scrollY += camScrollIncrement;
+      });
+      keyboard.on('keydown-SPACE', () => scene.player.startCamFollow())
     }
     
     constructor(scn) {
       scene = scn;
       width = scene.cameras.main.width;
       height = scene.cameras.main.height;
-      this.create_ui();
+      this.create();
     }
     
     enterButtonActive() {
@@ -45,7 +70,8 @@ class UI {
     }
     
     update(time, delta) {
-      
+      // drawbridge.x = width / 2 - 100 + scene.cameras.main.scrollX;
+      // drawbridge.y = height - 32 + scene.cameras.main.scrollY;
     }
 }
 

@@ -2,10 +2,6 @@ import UI from './game-parts/ui.js';
 import Player from './game-parts/player.js';
 import Map from './game-parts/map.js';
 
-const wizardVelocity = 100;
-
-var player, ui, map;
-
 class Castle extends Phaser.Scene{
 
     constructor (config) {super(config)}

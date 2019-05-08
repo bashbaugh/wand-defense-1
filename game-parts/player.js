@@ -14,8 +14,12 @@ class Player {
         
         pointer = scene.input.activePointer;
         
-        scene.cameras.main.setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels);
-        scene.cameras.main.startFollow(player);
+      
+        this.startCamFollow()
+    }
+    
+    startCamFollow() {
+      scene.cameras.main.startFollow(player);
     }
     
     constructor(scn) {

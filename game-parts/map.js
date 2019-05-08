@@ -1,5 +1,6 @@
 var scene;
 var map, groundLayer;
+var camera;
 
 class Map {
     
@@ -10,6 +11,8 @@ class Map {
         this.map = scene.make.tilemap({key: 'castle'});
         var groundTiles = this.map.addTilesetImage('castle1', 'tiles');
         groundLayer = this.map.createStaticLayer('ground', groundTiles, 0, 0);
+        
+        scene.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     }
     
     constructor(scn) {
