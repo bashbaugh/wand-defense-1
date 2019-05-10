@@ -8,9 +8,12 @@ class Castle extends Phaser.Scene{
     preload () {}
 
     create (data)  {
+        this.xxx = 500;
         this.map = new Map(this);
         this.player = new Player(this);
         this.ui = new UI(this);
+        
+        this.cameras.main.setName('main').setViewport(0, 0, 800, 500);
     }
 
     update(time, delta) {

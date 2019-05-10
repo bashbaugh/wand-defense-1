@@ -21,7 +21,7 @@ class UI {
       .on('pointerout', () => this.exitButtonActive())
       .on('pointerup', () => console.log("drawbridge toggled"));
       
-      // Keyboard
+      // Keyboard Controls
       keyboard.on('keydown-LEFT', () => {
         cam.stopFollow();
         cam.scrollX -= camScrollIncrement;
@@ -38,7 +38,14 @@ class UI {
         cam.stopFollow();
         cam.scrollY += camScrollIncrement;
       });
-      keyboard.on('keydown-SPACE', () => scene.player.startCamFollow())
+      keyboard.on('keydown-SPACE', () => {
+        scene.cameras.main.pan(scene.player.player.x, this.player.player.y, 400, 'Linear', (cam, progress) => {
+            if (progress > 0.9) cam.startFollow(scene.player.player);
+        });
+      });
+      
+      // Minimap
+
     }
     
     constructor(scn) {

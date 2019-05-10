@@ -1,5 +1,5 @@
 var scene;
-var pointer, player;
+var pointer;
 var target, targetx, targety;
 
 const wizardVelocity = 200;
@@ -7,46 +7,41 @@ const wizardVelocity = 200;
 class Player {
     
     create() {
-        var width = scene.cameras.main.width;
-        var height = scene.cameras.main.height;
         
-        player = scene.physics.add.sprite(width / 2, height / 2, 'player');
-        
-        pointer = scene.input.activePointer;
-        
-      
-        this.startCamFollow()
-    }
-    
-    startCamFollow() {
-      scene.cameras.main.startFollow(player);
     }
     
     constructor(scn) {
         scene = scn;
-        this.create();
+        var width = scene.cameras.main.width;
+        var height = scene.cameras.main.height;
+        
+        this.player = scene.physics.add.sprite(width / 2, height / 2, 'player');
+        
+        pointer = scene.input.activePointer;
+        
+        scene.cameras.main.startFollow(this.player);
     }
     
     update(time, delta) {
-      let rotation = Phaser.Math.Angle.Between(player.x, player.y, pointer.x + scene.cameras.main.scrollX, pointer.y + scene.cameras.main.scrollY) + 1.5708;
+      let rotation = Phaser.Math.Angle.Between(this.player.x, this.player.y, pointer.x + scene.cameras.main.scrollX, pointer.y + scene.cameras.main.scrollY) + 1.5708;
 
       if (pointer.leftButtonDown() && !scene.ui.uiAction) {
         targetx = pointer.x + scene.cameras.main.scrollX;
         targety = pointer.y + scene.cameras.main.scrollY;
-        player.rotation = rotation;
+        this.player.rotation = rotation;
         target = true;
       }
 
       if (target) {
-        scene.physics.moveTo(player, targetx, targety, wizardVelocity);
+        scene.physics.moveTo(this.player, targetx, targety, wizardVelocity);
       } else {
-        player.rotation = rotation;
+        this.player.rotation = rotation;
       }
 
-      if (Math.abs(player.x - targetx) < 5 && Math.abs(player.y - targety) < 5) {
+      if (Math.abs(this.player.x - targetx) < 5 && Math.abs(this.player.y - targety) < 5) {
         target = false;
-        player.setVelocityX(0);
-        player.setVelocityY(0);
+        this.player.setVelocityX(0);
+        this.player.setVelocityY(0);
       }
     }
 }
