@@ -9,6 +9,8 @@ class UI {
     create() {
       var cam = scene.cameras.main;
       var keyboard = scene.input.keyboard;
+      // HUD
+      var hudCam = scene.cameras.add(0, 500, 800, 100, false, 'hud')
       // Buttons
       drawbridge = scene.make.image({
         key: 'drawbridge_icon',
@@ -43,8 +45,6 @@ class UI {
             if (progress > 0.9) cam.startFollow(scene.player.player);
         });
       });
-      
-      // Minimap
 
     }
     
